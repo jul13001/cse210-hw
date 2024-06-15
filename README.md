@@ -1,5 +1,5 @@
 # cse210-ww-student-template
-My name is emily juliao
+My name is emily juliao. I like software development
 
 This repository contains the starter code for many different projects. They are arranged as follows:
 
