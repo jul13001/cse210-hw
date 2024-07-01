@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public class Scripture
 {
     private string _reference;
-    public List<Word> _words = new List<Word>();
+    private List<Word> _words = new List<Word>();
 
     public Scripture(string reference, string text)
     {
@@ -20,13 +18,17 @@ public class Scripture
         numberToHide = _words.Count;
        }
        Random random = new Random();
-       var indices = Enumerable.Range(0, _words.Count);
-
-       foreach (var index in indices)
+       var visibleWords = _words.Where(w => !w.IsHidden()).ToList();
+       var wordsToHide = visibleWords.OrderBy(x => random.Next()).Take(numberToHide);
+       foreach (var word in wordsToHide)
        {
-        _words[index].Hide();
+        word.Hide();
        }
     
+    }
+    public string GetDisplayText()
+    {
+        return $"{_reference} - {string.Join(" ", _words.Select(w => w.GetDisplayText()))}";
     }
 
 

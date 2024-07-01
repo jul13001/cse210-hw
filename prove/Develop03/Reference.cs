@@ -11,7 +11,6 @@ public class Reference
         _chapter = chapter;
         _verse = verse;
         _endVerse = verse;
-        Reference r1 = new Reference("John", 3, 4);
 
     }
     public Reference(string book, int chapter, int startVerse, int endVerse)

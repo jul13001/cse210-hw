@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+using System;
 
 public class Word
 {
@@ -9,7 +9,6 @@ public class Word
     {
         _text = text;
         _isHidden = false;
-        Word w1 = new Word("For God so loved the world he gave his only Begotten Son.");
     }
 
     public void Hide()
