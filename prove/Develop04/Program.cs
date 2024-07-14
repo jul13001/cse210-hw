@@ -3,12 +3,8 @@ using System;
 class Program
 {
     static void Main(string[] args)
-    {
-        BreathingActivity breathingActivity = new BreathingActivity();
-        ReflectingActivity reflectingActivity = new ReflectingActivity();
-        ListingActivity listingActivity = new ListingActivity();
-        int userChoice = 0;
-        while (userChoice != 4)
+    {   
+        while (true)
         {
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Start breathing activity");
@@ -17,27 +13,42 @@ class Program
             Console.WriteLine("4. Quit");
             Console.WriteLine("Select a choice from the menu:");
             string choice = Console.ReadLine();
-            userChoice = int.Parse(choice);
-
-            if (userChoice == 1)
-            {
-                breathingActivity.Run();
-            }
-            else if (userChoice == 2)
-            {
-                reflectingActivity.Run();
-            }
-            else if (userChoice == 3);
-            {
-                listingActivity.Run();
-            }
-            else if(userChoice == 4)
+            if (choice == "4")
             {
                 break;
             }
-            else if( userChoice > 4)
+            // Prompt for duration if the user did not choose to quit
+
+            Console.Write("Enter the duration for the activity in seconds: ");
+            string durationInput = Console.ReadLine();
+            int duration = int.Parse(durationInput);
+
+            DateTime startTime = DateTime.Now;
+            DateTime futureTime = startTime.AddSeconds(duration);
+            DateTime currentTime = DateTime.Now;
+            if (choice == "1")
             {
-                return $"That is an invalid option, try again.";
+                BreathingActivity breathingActivity = new BreathingActivity("Breathing Activity", "This activity will help you relax by walking you through breathing in and out slowly", duration);
+                breathingActivity.DisplayStartingMessage();
+                if (currentTime < futureTime)
+                    breathingActivity.Run();
+                breathingActivity.DisplayEndingMessage();
+            }
+            else if (choice == "2")
+            {
+                ReflectingActivity reflectingActivity = new ReflectingActivity("Reflecting Activity", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.", duration);
+                reflectingActivity.DisplayStartingMessage();
+                if (currentTime < futureTime)
+                    reflectingActivity.Run();
+                reflectingActivity.DisplayEndingMessage();
+            }
+            else if (choice == "3")
+            {
+                ListingActivity listingActivity = new ListingActivity("Listing Activity", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.", duration);
+                listingActivity.DisplayStartingMessage();
+                if (currentTime < futureTime)
+                    listingActivity.Run();
+                listingActivity.DisplayEndingMessage();
             }
         }
     }

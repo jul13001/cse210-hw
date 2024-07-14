@@ -13,28 +13,43 @@ public class ListingActivity : Activity
         "Who are some of your personal heroes?",
     };
 
-    public ListingActivity(string name, string description, int duration, int count, List<string> prompts): base(name, description, duration)
+    public ListingActivity(string name, string description, int duration): base(name, description, duration)
     {
-        _count = count;
-        _prompts = prompts;
     }
-
+    List<string> _entries = new List<string>();
     public void Run()
     {
+        Console.WriteLine("Get Ready..");
+        ShowSpinner(5);
+        string prompt = GetRandomPrompt();
+        DisplayPrompt(prompt);
+
+        GetListFromUser();
+
+        Console.WriteLine($"You have entered {_entries.Count} items.");
 
     }
-    public void GetRandomPrompt()
+    public string GetRandomPrompt()
     {
         Random rand = new Random();
         int index = rand.Next(_prompts.Count);
+        return _prompts[index];
     }
-
+    private void DisplayPrompt(string prompt)
+    {
+        Console.WriteLine($"Consider this prompt: {prompt}");
+        ShowSpinner(5);
+    }
     public void GetListFromUser()
     {
         for (int i = 0; i < _count; i++)
         {
             Console.WriteLine("Enter an item: ");
             string input = Console.ReadLine();
+            if (!string.IsNullOrEmpty(input))
+            {
+                _entries.Add(input);
+            }
         }
     }
 }
