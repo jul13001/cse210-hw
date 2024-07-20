@@ -11,10 +11,6 @@ public class GoalManager
     {
     }
 
-    public void Start()
-    {
-    
-    }
 
     public void DisplayPlayerInfo()
     {
@@ -23,9 +19,13 @@ public class GoalManager
 
     public void ListGoalNames()
     {
+        Console.WriteLine(_goals.Count());
+        int i = 1;
         foreach (Goal goal in _goals)
         {
-            Console.WriteLine(goal.GetName());
+            goal.Display(i);
+            i += 1;
+            //.WriteLine(goal.GetName());
         }
     }
 
@@ -37,7 +37,6 @@ public class GoalManager
         Console.WriteLine("3. CheckList Goal");
 
         var typeChoice = Console.ReadLine();
-        Goal newGoal = null;
 
         switch (typeChoice)
         {
@@ -48,8 +47,9 @@ public class GoalManager
                 string sDescription = Console.ReadLine();
                 Console.Write("Enter goal points: ");
                 int sPoints = int.Parse(Console.ReadLine());
-                newGoal = new SimpleGoal(sName, sDescription, sPoints);
-                break;
+                SimpleGoal newGoal = new SimpleGoal(sName, sDescription, sPoints);
+                _goals.Add(newGoal);
+            return;
             case "2":
                 Console.Write("Enter goal name: ");
                 string eName = Console.ReadLine();
@@ -57,8 +57,9 @@ public class GoalManager
                 string eDescription = Console.ReadLine();
                 Console.Write("Enter goal points: ");
                 int ePoints = int.Parse(Console.ReadLine());
-                newGoal = new EternalGoal(eName, eDescription, ePoints);
-                break;
+                EternalGoal newEternalgoal = new EternalGoal(eName, eDescription, ePoints);
+                _goals.Add(newEternalgoal);
+            return;
             case "3":
                 Console.Write("Enter goal name: ");
                 string cName = Console.ReadLine();
@@ -70,13 +71,10 @@ public class GoalManager
                 int cTimes = int.Parse(Console.ReadLine());
                 Console.WriteLine("What is the bonus for accomplishing this task?");
                 int cBonus = int.Parse(Console.ReadLine());
-                newGoal = new CheckListGoal(cName, cDescription, cPoints, cTimes, cBonus);
-                break;
-        }
+                CheckListGoal newChecklistgoal = new CheckListGoal(cName, cDescription, cPoints, cTimes, cBonus);
+                _goals.Add(newChecklistgoal);
+            return;
 
-        if (newGoal != null)
-        {
-            _goals.Add(newGoal);
         }
     }
 
@@ -86,6 +84,7 @@ public class GoalManager
         {
             string goals = goal.GetDetailsString();
             Console.WriteLine(goals);
+            Console.WriteLine("Anything Test of ListGoal Details");
         }
     }
     public void RecordEvent()

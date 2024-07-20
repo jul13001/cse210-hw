@@ -28,7 +28,7 @@ class Program
             }
             if(choice == "2")
             {
-                _goalmanager.ListGoalDetails();
+                _goalmanager.ListGoalNames();
             }
             if (choice == "3")
             {

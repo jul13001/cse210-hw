@@ -33,7 +33,10 @@ public abstract class Goal
     {
         _description = description;
     }
-
+    public virtual void Display(int i)
+    {
+        
+    }
     public int GetPoints()
     {
         return _points;
